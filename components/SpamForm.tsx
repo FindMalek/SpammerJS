@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@component/ui/Form";
 import { Input } from "@component/ui/Input";
+import { useToast } from "@hook/use-toast";
 
 const formSchema = z.object({
   serviceId: z
@@ -23,12 +24,14 @@ const formSchema = z.object({
 
   templateId: z
     .string()
-    .regex(/^template_[a-zA-Z0-9]{7600}/, "Invalid Template ID format."),
+    .regex(/^template_[a-zA-Z0-9]{7}/, "Invalid Template ID format."),
 
   userId: z.string().length(17, "The User ID must be 17 characters long."),
 });
 
 export default function SpamForm() {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,11 +43,19 @@ export default function SpamForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    toast({
+      title: "We started spamming!",
+      description:
+        "We won't stop until your friend quota is full.",
+    });
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto max-w-2xl -mt-8 px-10 space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mx-auto max-w-2xl -mt-8 px-10 space-y-8"
+      >
         <FormField
           control={form.control}
           name="userId"
@@ -87,7 +98,12 @@ export default function SpamForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600/80">Spam</Button>
+        <Button
+          type="submit"
+          className="w-full bg-amber-500 hover:bg-amber-600/80"
+        >
+          Spam
+        </Button>
       </form>
     </Form>
   );

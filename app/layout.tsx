@@ -5,6 +5,7 @@ import { GeistSans } from "geist/font/sans";
 
 import Header from "@component/Header";
 import Background from "@component/Background";
+import Footer from "@component/Footer";
 
 export const metadata: Metadata = {
   title: "SpammerJS - The best email spammer",
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={GeistSans.className}>
         <Header />
         {children}
+        <Footer />
         <Background />
       </body>
     </html>
