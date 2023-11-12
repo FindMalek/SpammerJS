@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <>
-      <div className="mx-auto max-w-2xl py-24 px-6 sm:px-10 lg:py-24">
+      <div className="mx-auto max-w-2xl py-20 px-6 sm:px-10 lg:py-20">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             It&apos;s free and open source{" "}

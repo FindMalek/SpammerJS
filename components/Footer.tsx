@@ -18,19 +18,16 @@ export default function Footer() {
         <div>
           <Link
             href="https://spammer-js.vercel.app/"
-            className="inline-flex gap-1.5 text-lg font-medium text-gray-900"
+            className="inline-flex gap-1.5 text-base font-semibold text-gray-900"
           >
             SpammerJS
           </Link>
-          <p className="mt-2 text-sm text-gray-600">
-            SpammerJS is the best email spammer. It is free and open source.
-          </p>
           <ul className="flex gap-4 pt-2    ">
             {menuLinks.map((menuLink) => (
               <li key={menuLink.href}>
                 <Link
                   href={menuLink.href}
-                  className="block text-sm font-medium text-gray-900 hover:opacity-75"
+                  className="block text-sm font-medium text-gray-700 hover:opacity-75"
                 >
                   {menuLink.title}
                 </Link>
