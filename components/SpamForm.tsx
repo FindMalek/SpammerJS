@@ -91,7 +91,7 @@ export default function SpamForm() {
             control={form.control}
             name="templateId"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Template ID</FormLabel>
                 <FormControl>
                   <Input placeholder="template_abcefgh" {...field} />
@@ -105,7 +105,7 @@ export default function SpamForm() {
             control={form.control}
             name="serviceId"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Service ID</FormLabel>
                 <FormControl>
                   <Input placeholder="service_abcefgh" {...field} />
