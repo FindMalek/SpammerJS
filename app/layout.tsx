@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://spammerjs.vercel.app",
     images: [
       {
-        url: "https://spammerjs.vercel.app/og.svg",
+        url: "https://spammerjs.vercel.app/og.png",
         width: 1280,
         height: 1280,
         alt: "SpammerJS - The best email spammer",
