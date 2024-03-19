@@ -1,13 +1,12 @@
 "use client";
 
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import React from "react";
-import { fakerData, sendEmail, delay } from "@/lib/utils";
+import { useToast } from "@hook/use-toast";
+import { fakerData, sendEmail, delay } from "@lib/utils";
 
-import { Button } from "@component/ui/Button";
 import {
   Form,
   FormControl,
@@ -18,7 +17,7 @@ import {
   FormMessage,
 } from "@component/ui/Form";
 import { Input } from "@component/ui/Input";
-import { useToast } from "@hook/use-toast";
+import { Button } from "@component/ui/Button";
 
 const formSchema = z.object({
   serviceId: z
@@ -38,12 +37,6 @@ export default function SpamForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      serviceId: "",
-      templateId: "",
-      userId: "",
-      website: "",
-    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -55,7 +48,7 @@ export default function SpamForm() {
     for (let i = 0; i < 10; i++) {
       await sendEmail(values, fakerData());
       if ((i + 1) % 3 === 0) {
-        await delay(2000); 
+        await delay(2000);
       }
     }
 
@@ -86,7 +79,7 @@ export default function SpamForm() {
             </FormItem>
           )}
         />
-        <div className="flex flex-row gap-4">
+        <div className="sm:flex sm:flex-row sm:gap-4">
           <FormField
             control={form.control}
             name="templateId"
@@ -101,6 +94,7 @@ export default function SpamForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="serviceId"
@@ -132,10 +126,7 @@ export default function SpamForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          className="w-full bg-amber-500 hover:bg-amber-600/80"
-        >
+        <Button type="submit" className="w-full">
           Spam
         </Button>
       </form>

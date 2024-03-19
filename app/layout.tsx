@@ -4,8 +4,11 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 
 import Header from "@component/Header";
+import { SiteFooter } from "@component/Footer";
 import Background from "@component/Background";
-import Footer from "@component/Footer";
+import { TailwindIndicator } from "@component/config/TailwindIndicator";
+
+import { Toaster } from "@component/ui/Toaster";
 
 export const metadata: Metadata = {
   title: "SpammerJS - The best email spammer",
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://spammerjs.vercel.app",
     images: [
       {
-        url: "https://spammerjs.vercel.app/og.png",
+        url: "https://spammerjs.vercel.app/og.svg",
         width: 1280,
         height: 1280,
         alt: "SpammerJS - The best email spammer",
@@ -42,8 +45,10 @@ export default function RootLayout({
       <body className={GeistSans.className}>
         <Header />
         {children}
-        <Footer />
+        <Toaster />
+        <SiteFooter />
         <Background />
+        <TailwindIndicator />
       </body>
     </html>
   );

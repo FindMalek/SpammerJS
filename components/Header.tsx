@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <div className="mx-auto max-w-2xl py-20 px-6 sm:px-10 lg:py-20">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+          <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/20 hover:ring-gray-900/60">
             It&apos;s free and open source{" "}
             <Link
               target="_blank"
@@ -18,7 +18,7 @@ export default function Header() {
           </div>
         </div>
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-red-800 to-amber-400 sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-amber-500 to-amber-300 sm:text-6xl">
             SpammerJS is the best email spammer.
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">

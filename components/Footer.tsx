@@ -1,53 +1,45 @@
-import Link from "next/link";
+import * as React from "react";
 
-export default function Footer() {
-  const menuLinks = [
-    {
-      title: "FAQs",
-      href: "/about/faqs",
-    },
-    {
-      title: "Acknowledgements",
-      href: "/about/acknowledgements",
-    },
-  ];
+import { cn } from "@lib/utils";
+import { siteConfig } from "@config/site";
+import { Button } from "@component/ui/Button";
 
+export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
-    <footer className="border-t border-gray-200 bg-white p-4">
-      <div className="flex justify-between items-center">
-        <div>
-          <Link
-            href="https://spammer-js.vercel.app/"
-            className="inline-flex gap-1.5 text-base font-semibold text-gray-900"
-          >
-            SpammerJS
-          </Link>
-          <ul className="flex gap-4 pt-2    ">
-            {menuLinks.map((menuLink) => (
-              <li key={menuLink.href}>
-                <Link
-                  href={menuLink.href}
-                  className="block text-sm font-medium text-gray-700 hover:opacity-75"
-                >
-                  {menuLink.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Right part */}
-        <div>
-          <p className="mt-4 text-sm text-gray-600">
-            Created by{" "}
-            <Link
-              href="https://github.com/findmalek"
-              rel="noreferrer"
+    <footer className={cn(className)}>
+      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+          <Button size={"icon"} variant={"secondary"}>
+            🔺
+          </Button>
+          <p className="text-center text-sm leading-loose md:text-left">
+            Built by{" "}
+            <a
+              href={siteConfig.links.website}
               target="_blank"
-              className="font-medium text-gray-700 hover:text-gray-900"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
             >
-              FindMalek
-            </Link>
+              findmalek
+            </a>
+            . Hosted on{" "}
+            <a
+              href="https://vercel.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Vercel
+            </a>
+            . The source code is available on{" "}
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              GitHub
+            </a>
             .
           </p>
         </div>
