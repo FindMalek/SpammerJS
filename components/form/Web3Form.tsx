@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@hook/use-toast";
-import { emailJsSchema } from "@config/schema";
-import { fakerData, sendEmailJS, delay, cn } from "@lib/utils";
+import { web3Schema } from "@config/schema";
+import { fakerData, sendWeb3Form, delay, cn } from "@lib/utils";
 
 import {
     Form,
@@ -23,31 +23,31 @@ import { Icons } from "@component/ui/Icons";
 import { Slider } from "@component/ui/Slider"
 import { buttonVariants } from "@component/ui/Button";
 
-export default function EmailJsForm() {
+export default function Web3Form() {
     const { toast } = useToast();
     const [count, setCount] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    const form = useForm<z.infer<typeof emailJsSchema>>({
-        resolver: zodResolver(emailJsSchema),
+    const form = useForm<z.infer<typeof web3Schema>>({
+        resolver: zodResolver(web3Schema),
     });
 
-    async function onSubmit(values: z.infer<typeof emailJsSchema>) {
+    async function onSubmit(values: z.infer<typeof web3Schema>) {
         setLoading(true);
         for (let i = 0; i < count; i++) {
-            const data = await sendEmailJS(values, fakerData());
-
+            const data = await sendWeb3Form(values.apiKey, fakerData("web3-forms"));
+            console.log(data);
             if (data.error) {
                 toast({
                     title: "Error",
-                    description: data.error,
+                    description: "Something went wrong",
                     variant: "destructive",
                 });
                 return;
             }
 
             toast({
-                title: `Email sent to ${values.userId}`,
+                title: `Email sent`,
                 description: <pre>{JSON.stringify(data.data, null, 2)}</pre>
             });
 
@@ -66,7 +66,7 @@ export default function EmailJsForm() {
             >
                 <FormField
                     control={form.control}
-                    name="userId"
+                    name="apiKey"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>User ID</FormLabel>
@@ -78,37 +78,6 @@ export default function EmailJsForm() {
                         </FormItem>
                     )}
                 />
-                <div className="sm:flex sm:flex-row sm:gap-4">
-                    <FormField
-                        control={form.control}
-                        name="templateId"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Template ID</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="template_abcefgh" {...field} />
-                                </FormControl>
-                                <FormDescription></FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name="serviceId"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Service ID</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="service_abcefgh" {...field} />
-                                </FormControl>
-                                <FormDescription></FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
 
                 <Slider
                     defaultValue={[count]}

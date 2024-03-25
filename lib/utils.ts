@@ -14,11 +14,19 @@ export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function fakerData() {
+export function fakerData(spammer: string) {
+  if (spammer === "web3-forms") {
+    return {
+      name: faker.person.firstName(),
+      email: faker.internet.email(),
+      subject: "You have been spammed by https://spammer-js.vercel.app/",
+      message: "You have been spammed by https://spammer-js.vercel.app/",
+    };
+  }
   return {
     user_email: faker.internet.email(),
-    user_subject: faker.lorem.sentence(),
-    message: faker.lorem.paragraph(),
+    user_subject: "You have been spammed by https://spammer-js.vercel.app/",
+    message: "You have been spammed by https://spammer-js.vercel.app/",
   };
 }
 
@@ -50,4 +58,29 @@ export function sendEmailJS(values: SpamType, formFake: FormType) {
         };
       },
     );
+}
+
+export async function sendWeb3Form(value: String, formFake: FormType) {
+  try {
+    const request = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        apikey: value,
+        ...formFake,
+      }),
+    }).then((res) => res.json());
+    console.log(request);
+  } catch (error) {
+    return {
+      error: error,
+      status: null,
+      data: formFake,
+    };
+  }
+  return {
+    data: formFake,
+    status: "success",
+    error: null,
+  };
 }

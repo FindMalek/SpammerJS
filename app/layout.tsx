@@ -1,5 +1,6 @@
 import "@style/globals.css";
 
+import Link from "next/link";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 
@@ -59,22 +60,14 @@ export default function RootLayout({
         <Header />
         <Tabs defaultValue="email-js" className="sm:w-[700px] container w-fit">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="email-js">EmailJS</TabsTrigger>
-            <TabsTrigger value="web3-forms">Web3Forms</TabsTrigger>
+            <TabsTrigger value="email-js">
+              <Link href="?spammer=email-js" className="w-full">EmailJS</Link>
+            </TabsTrigger>
+            <TabsTrigger value="web3-forms">
+              <Link href="?spammer=web3-forms" className="w-full">Web3Forms</Link>
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="email-js">
-            <Card>
-              <CardHeader>
-                <CardTitle>EmailJS</CardTitle>
-                <CardDescription>
-                  Search your friend code base for the exposed emailjs keys.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {children}
-              </CardContent>
-            </Card>
-          </TabsContent>
+          {children}
         </Tabs>
         <Toaster />
         <SiteFooter />
