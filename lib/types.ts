@@ -2,7 +2,6 @@ export type SpamType = {
     serviceId: string;
     templateId: string;
     userId: string;
-    website: string;
 };
 
 export type FormType = {

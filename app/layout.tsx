@@ -8,6 +8,19 @@ import { SiteFooter } from "@component/Footer";
 import Background from "@component/Background";
 import { TailwindIndicator } from "@component/config/TailwindIndicator";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@component/ui/Card"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@component/ui/Tabs"
 import { Toaster } from "@component/ui/Toaster";
 
 export const metadata: Metadata = {
@@ -44,7 +57,25 @@ export default function RootLayout({
     <html lang="en">
       <body className={GeistSans.className}>
         <Header />
-        {children}
+        <Tabs defaultValue="email-js" className="sm:w-[700px] container w-fit">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="email-js">EmailJS</TabsTrigger>
+            <TabsTrigger value="web3-forms">Web3Forms</TabsTrigger>
+          </TabsList>
+          <TabsContent value="email-js">
+            <Card>
+              <CardHeader>
+                <CardTitle>EmailJS</CardTitle>
+                <CardDescription>
+                  Search your friend code base for the exposed emailjs keys.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {children}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
         <Toaster />
         <SiteFooter />
         <Background />

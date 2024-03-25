@@ -22,8 +22,7 @@ export function fakerData() {
   };
 }
 
-export function sendEmail(values: SpamType, formFake: FormType) {
-  console.log(formFake);
+export function sendEmailJS(values: SpamType, formFake: FormType) {
   return emailjs
     .send(
       values.serviceId,
@@ -37,10 +36,18 @@ export function sendEmail(values: SpamType, formFake: FormType) {
     )
     .then(
       (result) => {
-        console.log(result.text);
+        return {
+          data: formFake,
+          status: result.text,
+          error: null,
+        };
       },
       (error) => {
-        console.log(error.text);
+        return {
+          error: error.text,
+          status: null,
+          data: formFake,
+        };
       },
     );
 }

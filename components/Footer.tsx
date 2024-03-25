@@ -7,7 +7,7 @@ import { Button } from "@component/ui/Button";
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn(className)}>
-      <div className="container flex justify-center items-center gap-4 py-10 md:h-24 md:flex-row md:py-0">
+      <div className="container flex justify-center items-center gap-4 py-14 md:h-24 md:flex-row">
         <div />
         <div className="flex flex-col items-center gap-4 px-8">
           <Button size={"icon"} variant={"secondary"}>
