@@ -35,7 +35,7 @@ export default function EmailJsForm() {
     async function onSubmit(values: z.infer<typeof emailJsSchema>) {
         setLoading(true);
         for (let i = 0; i < count; i++) {
-            const data = await sendEmailJS(values, fakerData());
+            const data = await sendEmailJS(values, fakerData("emailjs"));
 
             if (data.error) {
                 toast({
