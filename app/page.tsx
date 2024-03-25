@@ -25,9 +25,9 @@ export default function Home({
       <TabsContent value="web3-forms">
         <Card>
           <CardHeader>
-            <CardTitle>EmailJS</CardTitle>
+            <CardTitle>Web3 Forms</CardTitle>
             <CardDescription>
-              Search your friend code base for the exposed emailjs keys.
+              Search your friend code base for the exposed API key of Web3 form.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">

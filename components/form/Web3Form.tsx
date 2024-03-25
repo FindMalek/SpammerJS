@@ -36,14 +36,12 @@ export default function Web3Form() {
         setLoading(true);
         for (let i = 0; i < count; i++) {
             const data = await sendWeb3Form(values.apiKey, fakerData("web3-forms"));
-            console.log(data);
             if (data.error) {
                 toast({
                     title: "Error",
                     description: "Something went wrong",
                     variant: "destructive",
                 });
-                return;
             }
 
             toast({
@@ -53,6 +51,8 @@ export default function Web3Form() {
 
             if ((i + 1) % 3 === 0) {
                 await delay(2000);
+            } else {
+                await delay(200)
             }
         }
         setLoading(false);
