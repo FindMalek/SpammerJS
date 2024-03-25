@@ -34,25 +34,19 @@ export default function Web3Form() {
 
     async function onSubmit(values: z.infer<typeof web3Schema>) {
         setLoading(true);
-        for (let i = 0; i < count; i++) {
+
+        let i = 0;
+        while (i < count) {
             const data = await sendWeb3Form(values.apiKey, fakerData("web3-forms"));
             if (data.error) {
-                toast({
-                    title: "Error",
-                    description: "Something went wrong",
-                    variant: "destructive",
-                });
-            }
-
-            toast({
-                title: `Email sent`,
-                description: <pre>{JSON.stringify(data.data, null, 2)}</pre>
-            });
-
-            if ((i + 1) % 3 === 0) {
-                await delay(2000);
+                console.log("Failed to sent, resting for 2 seconds...")
+                await delay(5000);
             } else {
-                await delay(200)
+                toast({
+                    title: `Email sent`,
+                    description: <pre className="break-all">{JSON.stringify(data.data, null, 2)}</pre>
+                });
+                i++;
             }
         }
         setLoading(false);
@@ -69,9 +63,11 @@ export default function Web3Form() {
                     name="apiKey"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>User ID</FormLabel>
+                            <FormLabel>
+                                API Key
+                            </FormLabel>
                             <FormControl>
-                                <Input placeholder="Your friend User ID" {...field} />
+                                <Input placeholder="Your friend API Key" {...field} />
                             </FormControl>
                             <FormDescription></FormDescription>
                             <FormMessage />

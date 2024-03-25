@@ -64,16 +64,18 @@ export async function sendWeb3Form(value: String, formFake: FormType) {
   try {
     const request = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         apikey: value,
         ...formFake,
       }),
     }).then((res) => res.json());
-    console.log(request);
-  } catch (error) {
+  } catch (error: any) {
     return {
-      error: error,
+      error: error.message,
       status: null,
       data: formFake,
     };
