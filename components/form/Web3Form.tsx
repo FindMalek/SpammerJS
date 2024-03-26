@@ -23,7 +23,7 @@ import { Input } from "@component/ui/Input";
 import { Icons } from "@component/ui/Icons";
 import { Slider } from "@component/ui/Slider"
 import { buttonVariants } from "@component/ui/Button";
-    
+
 export default function Web3Form() {
     const { toast } = useToast();
     const [count, setCount] = useState(1);
@@ -54,6 +54,7 @@ export default function Web3Form() {
         while (i < count) {
             try {
                 await submit(fakerData);
+                console.log(`${i + 1} email sent out of ${count}...`);
                 i++;
             }
             catch (error) {
