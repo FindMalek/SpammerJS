@@ -3,11 +3,12 @@
 import * as z from "zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import useWeb3Forms from "@web3forms/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@hook/use-toast";
 import { web3Schema } from "@config/schema";
-import { fakerData, sendWeb3Form, delay, cn } from "@lib/utils";
+import { fakerData, delay, cn } from "@lib/utils";
 
 import {
     Form,
@@ -22,7 +23,7 @@ import { Input } from "@component/ui/Input";
 import { Icons } from "@component/ui/Icons";
 import { Slider } from "@component/ui/Slider"
 import { buttonVariants } from "@component/ui/Button";
-
+    
 export default function Web3Form() {
     const { toast } = useToast();
     const [count, setCount] = useState(1);
@@ -35,18 +36,28 @@ export default function Web3Form() {
     async function onSubmit(values: z.infer<typeof web3Schema>) {
         setLoading(true);
 
+        const { submit } = useWeb3Forms({
+            access_key: values.apiKey,
+            settings: fakerData("web3-forms"),
+            onSuccess: (msg, data) => {
+                toast({
+                    title: "Email sent",
+                    description: <pre className="break-all text-xs bg-gray-900 text-white rounded-md">{JSON.stringify(data, null, 2)}</pre>
+                });
+            },
+            onError: (msg, data) => {
+                console.log("Failed to sent, resting for 5 seconds...");
+            },
+        });
+
         let i = 0;
         while (i < count) {
-            const data = await sendWeb3Form(values.apiKey, fakerData("web3-forms"));
-            if (data.error) {
-                console.log("Failed to sent, resting for 2 seconds...")
-                await delay(5000);
-            } else {
-                toast({
-                    title: `Email sent`,
-                    description: <pre className="break-all">{JSON.stringify(data.data, null, 2)}</pre>
-                });
+            try {
+                await submit(fakerData);
                 i++;
+            }
+            catch (error) {
+                await delay(5000);
             }
         }
         setLoading(false);

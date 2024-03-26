@@ -1,8 +1,7 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
 import emailjs from "@emailjs/browser";
 import { faker } from "@faker-js/faker";
+import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx";
 
 import { SpamType, FormType } from "@lib/types";
 
@@ -58,31 +57,4 @@ export function sendEmailJS(values: SpamType, formFake: FormType) {
         };
       },
     );
-}
-
-export async function sendWeb3Form(value: String, formFake: FormType) {
-  try {
-    const request = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        apikey: value,
-        ...formFake,
-      }),
-    }).then((res) => res.json());
-  } catch (error: any) {
-    return {
-      error: error.message,
-      status: null,
-      data: formFake,
-    };
-  }
-  return {
-    data: formFake,
-    status: "success",
-    error: null,
-  };
 }
