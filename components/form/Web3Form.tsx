@@ -53,7 +53,7 @@ export default function Web3Form() {
         let i = 0;
         while (i < count) {
             try {
-                await submit(fakerData);
+                await submit(fakerData("web3-forms"));
                 console.log(`${i + 1} email sent out of ${count}...`);
                 i++;
             }
